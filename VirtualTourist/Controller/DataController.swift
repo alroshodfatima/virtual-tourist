@@ -16,6 +16,8 @@ class DataController {
     var viewContext:NSManagedObjectContext {
         return persistentContainer.viewContext
     }
+    var pin: Pin?
+    var photo: Photo?
     
     private init() {
         persistentContainer = NSPersistentContainer(name: "VirtualTourist")

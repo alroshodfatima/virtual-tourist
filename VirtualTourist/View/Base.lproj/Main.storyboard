@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ld1-7W-QJf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Tz-aT-wey">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,10 +33,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ns6-sO-kEx"/>
+                    <navigationItem key="navigationItem" title="Map" id="ns6-sO-kEx"/>
                     <connections>
                         <outlet property="mapView" destination="tH7-M5-WbB" id="EkZ-gh-p3R"/>
-                        <segue destination="0P2-CU-rO7" kind="push" identifier="findLocationOnMap" id="b0F-sd-lxj"/>
+                        <segue destination="7QJ-Le-3P3" kind="push" identifier="findLocationOnMap" id="b0F-sd-lxj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -46,9 +46,9 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1957.9710144927537" y="100.44642857142857"/>
+            <point key="canvasLocation" x="2868.115942028986" y="100.44642857142857"/>
         </scene>
-        <!--Photo-->
+        <!--Photo Album-->
         <scene sceneID="9Al-ec-GkR">
             <objects>
                 <viewController storyboardIdentifier="PhotoAlbumViewController" id="0P2-CU-rO7" customClass="PhotoAlbumViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,7 +63,7 @@
                                 </constraints>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mcu-Mh-fwA">
-                                <rect key="frame" x="0.0" y="301" width="414" height="531"/>
+                                <rect key="frame" x="0.0" y="301" width="414" height="482"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="x7r-2C-baw">
                                     <size key="itemSize" width="189" height="148"/>
@@ -105,7 +105,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAp-9C-Xpz">
-                                <rect key="frame" x="0.0" y="832" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="783" width="414" height="30"/>
                                 <state key="normal" title="Reset Collection"/>
                                 <connections>
                                     <action selector="resetPhotoCollectionButton:" destination="0P2-CU-rO7" eventType="touchUpInside" id="qWR-1y-93L"/>
@@ -127,8 +127,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xN4-cg-YXm"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Photo" leftItemsSupplementBackButton="YES" id="RZ7-xM-oer">
-                        <barButtonItem key="backBarButtonItem" title="OK" id="pzW-Bb-hXK"/>
+                    <tabBarItem key="tabBarItem" title="" image="circle.grid.3x3" catalog="system" id="KVD-sz-OII"/>
+                    <navigationItem key="navigationItem" title="Photo Album" id="RZ7-xM-oer">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="FzA-VJ-nJI"/>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Mcu-Mh-fwA" id="yl9-Me-9PE"/>
@@ -138,25 +139,143 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5i8-1Q-rbB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3200.0000000000005" y="99.776785714285708"/>
+            <point key="canvasLocation" x="5930.434782608696" y="99.776785714285708"/>
+        </scene>
+        <!--Photo Album-->
+        <scene sceneID="6Px-Sy-Pbs">
+            <objects>
+                <viewController id="WrO-4m-L2J" customClass="PhotoAlbumTableViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vNk-dq-SgB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w8N-UX-7Sr">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PhotoTableViewCell" rowHeight="102" id="42n-hh-t8a">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="102"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="42n-hh-t8a" id="lgN-iW-RZt">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="102"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="WrO-4m-L2J" id="DJL-3J-tuh"/>
+                                    <outlet property="delegate" destination="WrO-4m-L2J" id="3PW-X5-OYW"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Vr3-l6-uAZ" firstAttribute="bottom" secondItem="w8N-UX-7Sr" secondAttribute="bottom" id="JBd-3L-Kwd"/>
+                            <constraint firstItem="w8N-UX-7Sr" firstAttribute="top" secondItem="Vr3-l6-uAZ" secondAttribute="top" id="MHG-oQ-QTK"/>
+                            <constraint firstItem="Vr3-l6-uAZ" firstAttribute="trailing" secondItem="w8N-UX-7Sr" secondAttribute="trailing" id="rOQ-ka-cSy"/>
+                            <constraint firstItem="w8N-UX-7Sr" firstAttribute="leading" secondItem="Vr3-l6-uAZ" secondAttribute="leading" id="zU1-mo-XY6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Vr3-l6-uAZ"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="EN2-b7-mEH"/>
+                    <navigationItem key="navigationItem" title="Photo Album" id="2Bw-hT-3D3">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="eQq-4K-JgB"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="w8N-UX-7Sr" id="HHx-vx-dCr"/>
+                        <segue destination="uQQ-ax-f2H" kind="push" identifier="showNote" id="zdU-LV-rLI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tJi-sK-pod" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5928.985507246377" y="853.79464285714278"/>
+        </scene>
+        <!--Photo Note-->
+        <scene sceneID="snU-vE-7W4">
+            <objects>
+                <viewController id="uQQ-ax-f2H" customClass="NoteViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hjX-C1-Cdx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ro4-Gn-qjd">
+                                <rect key="frame" x="0.0" y="88" width="414" height="740"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hN-fa-JDu">
+                                <rect key="frame" x="0.0" y="828" width="414" height="34"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ro4-Gn-qjd" firstAttribute="leading" secondItem="jet-iR-TSa" secondAttribute="leading" id="6oP-ug-Y65"/>
+                            <constraint firstItem="Ro4-Gn-qjd" firstAttribute="top" secondItem="jet-iR-TSa" secondAttribute="top" id="K4K-9t-CLI"/>
+                            <constraint firstItem="jet-iR-TSa" firstAttribute="trailing" secondItem="Ro4-Gn-qjd" secondAttribute="trailing" id="OkM-rZ-A2o"/>
+                            <constraint firstItem="9hN-fa-JDu" firstAttribute="leading" secondItem="jet-iR-TSa" secondAttribute="leading" id="V2W-an-eYl"/>
+                            <constraint firstItem="jet-iR-TSa" firstAttribute="trailing" secondItem="9hN-fa-JDu" secondAttribute="trailing" id="g5x-8Q-BbE"/>
+                            <constraint firstItem="9hN-fa-JDu" firstAttribute="top" secondItem="Ro4-Gn-qjd" secondAttribute="bottom" id="uuk-HJ-Dav"/>
+                            <constraint firstItem="jet-iR-TSa" firstAttribute="bottom" secondItem="9hN-fa-JDu" secondAttribute="bottom" id="xSf-Kb-lC6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jet-iR-TSa"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Photo Note" id="T5q-Lp-4rb">
+                        <barButtonItem key="rightBarButtonItem" title="Add Note" id="ICg-nZ-wda">
+                            <connections>
+                                <action selector="addNewNote:" destination="uQQ-ax-f2H" id="Jpz-gs-1Es"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="Ro4-Gn-qjd" id="DKo-7x-NkJ"/>
+                        <outlet property="noteTextField" destination="9hN-fa-JDu" id="zaN-6j-Ro9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ChA-VT-Tk3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7920.289855072464" y="854.46428571428567"/>
+        </scene>
+        <!--Photo Album-->
+        <scene sceneID="FGq-sf-7s8">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="7QJ-Le-3P3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Photo Album" id="SWy-oH-okY"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6GX-hm-lwm">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="0P2-CU-rO7" kind="relationship" relationship="viewControllers" id="FKb-oV-PrR"/>
+                        <segue destination="WrO-4m-L2J" kind="relationship" relationship="viewControllers" id="dHK-13-7mJ"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fq7-cd-b4J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4110.144927536232" y="99.776785714285708"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="oqq-tp-Rq2">
+        <scene sceneID="eCh-16-mOb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ld1-7W-QJf" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Tz-aT-wey" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="v45-Ve-yAd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d2R-SO-ANH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="SQ0-w6-VdT"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="TyI-7z-G9F"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Ec-ej-MPk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zXr-GH-bgf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="100.44642857142857"/>
+            <point key="canvasLocation" x="1957.9710144927537" y="100.44642857142857"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="circle.grid.3x3" catalog="system" width="64" height="54"/>
+        <image name="list.bullet" catalog="system" width="64" height="44"/>
+    </resources>
 </document>

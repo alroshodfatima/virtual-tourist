@@ -15,6 +15,9 @@
 		4C151A3C2395BC110006E339 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C151A3B2395BC110006E339 /* MapViewController.swift */; };
 		4C151A402395CD130006E339 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C151A3F2395CD130006E339 /* PhotoAlbumViewController.swift */; };
 		4C53D8D823AFE8BE0020DB58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53D8D723AFE8BD0020DB58 /* SceneDelegate.swift */; };
+		4C9C3B7C23B78217003C0B51 /* PhotoAlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C3B7B23B78217003C0B51 /* PhotoAlbumTableViewController.swift */; };
+		4C9C3B7E23B79158003C0B51 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C3B7D23B79158003C0B51 /* UIViewController+Extension.swift */; };
+		4C9C3B8023B7E36A003C0B51 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C3B7F23B7E36A003C0B51 /* NoteViewController.swift */; };
 		4CB0FAB8239AE196000547D1 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB0FAB7239AE196000547D1 /* PhotoCollectionViewCell.swift */; };
 		4CCA072523997C3200F9BA37 /* ClientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA072423997C3200F9BA37 /* ClientAPI.swift */; };
 		4CF3C14F239AA07B00720339 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF3C14E239AA07B00720339 /* PhotoResponse.swift */; };
@@ -32,6 +35,9 @@
 		4C151A3B2395BC110006E339 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4C151A3F2395CD130006E339 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 		4C53D8D723AFE8BD0020DB58 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4C9C3B7B23B78217003C0B51 /* PhotoAlbumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumTableViewController.swift; sourceTree = "<group>"; };
+		4C9C3B7D23B79158003C0B51 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		4C9C3B7F23B7E36A003C0B51 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		4CB0FAB7239AE196000547D1 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		4CCA072423997C3200F9BA37 /* ClientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAPI.swift; sourceTree = "<group>"; };
 		4CF3C14E239AA07B00720339 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
@@ -85,6 +91,9 @@
 				4C151A3F2395CD130006E339 /* PhotoAlbumViewController.swift */,
 				4CFDC5352396DAE100E412A3 /* DataController.swift */,
 				4CB0FAB7239AE196000547D1 /* PhotoCollectionViewCell.swift */,
+				4C9C3B7B23B78217003C0B51 /* PhotoAlbumTableViewController.swift */,
+				4C9C3B7D23B79158003C0B51 /* UIViewController+Extension.swift */,
+				4C9C3B7F23B7E36A003C0B51 /* NoteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -181,13 +190,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C151A2F2395BB890006E339 /* VirtualTourist.xcdatamodeld in Sources */,
+				4C9C3B7E23B79158003C0B51 /* UIViewController+Extension.swift in Sources */,
 				4CFDC5362396DAE100E412A3 /* DataController.swift in Sources */,
 				4CCA072523997C3200F9BA37 /* ClientAPI.swift in Sources */,
+				4C9C3B8023B7E36A003C0B51 /* NoteViewController.swift in Sources */,
 				4C151A252395BB890006E339 /* AppDelegate.swift in Sources */,
 				4C53D8D823AFE8BE0020DB58 /* SceneDelegate.swift in Sources */,
 				4CB0FAB8239AE196000547D1 /* PhotoCollectionViewCell.swift in Sources */,
 				4C151A402395CD130006E339 /* PhotoAlbumViewController.swift in Sources */,
 				4C151A3C2395BC110006E339 /* MapViewController.swift in Sources */,
+				4C9C3B7C23B78217003C0B51 /* PhotoAlbumTableViewController.swift in Sources */,
 				4CF3C14F239AA07B00720339 /* PhotoResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

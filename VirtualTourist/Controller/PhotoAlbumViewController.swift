@@ -18,7 +18,11 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    var pin: Pin?
+    var insertedIndexPaths: [IndexPath]!
+    var deletedIndexPaths: [IndexPath]!
+    var updatedIndexPaths: [IndexPath]!
+    var movedIndexPaths: [IndexPath:IndexPath]!
+    
     var context: NSManagedObjectContext {
         return DataController.shared.viewContext
     }
@@ -44,7 +48,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate {
             fetchPhotosURL()
         }
         
-        let coordinates = CLLocationCoordinate2D(latitude: pin!.latitude, longitude: pin!.longitude)
+        let coordinates = CLLocationCoordinate2D(latitude: DataController.shared.pin!.latitude, longitude: DataController.shared.pin!.longitude)
         
         let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
         let annotation = MKPointAnnotation()
@@ -72,7 +76,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate {
     // MARK: Custom functions
     func fetchPhotosURL() {
         
-        ClientAPI.shared.getPhotos(latitude: pin!.latitude.description, longitude: pin!.longitude.description) { (photosURL, error) in
+        ClientAPI.shared.getPhotos(latitude: DataController.shared.pin!.latitude.description, longitude: DataController.shared.pin!.longitude.description) { (photosURL, error) in
             if error != nil {
                 self.showFailure(message: error!.localizedDescription)
                 return
@@ -80,7 +84,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate {
             if photosURL.count != 0 {
                 self.addPhotosUrlForPin(photosURL)
             } else {
-                self.showFailure(message: "Please try again")
+                self.showFailure(message: "Sorry, photos weren't found. Please try again")
             }
         }
     }
@@ -89,7 +93,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate {
         for photoURL in photosURL {
             let photoInstance = Photo(context: context)
             photoInstance.url = photoURL
-            photoInstance.pin = pin
+            photoInstance.pin = DataController.shared.pin
             do {
                 try context.save()
             } catch {
@@ -100,7 +104,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate {
     
     func loadData() {
         let fetchRequest:NSFetchRequest<Photo> = Photo.fetchRequest()
-        let predicate = NSPredicate(format: "pin == %@", pin!)
+        let predicate = NSPredicate(format: "pin == %@", DataController.shared.pin!)
         fetchRequest.predicate = predicate
         let sortDescriptor = NSSortDescriptor(key: "url", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -115,20 +119,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func showFailure(message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "OK", style: .default) { (action) in
-        }
-        alert.addAction(dismissAction)
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
     // MARK: Actions
     @IBAction func resetPhotoCollectionButton(_ sender: Any) {
-        for photos in (fetchedResultsController?.fetchedObjects)! {
-            context.delete(photos)
+        for photo in DataController.shared.pin!.photos! {
+            context.delete(photo as! NSManagedObject)
         }
         do {
             try context.save()
@@ -218,24 +212,51 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension PhotoAlbumViewController:NSFetchedResultsControllerDelegate {
     
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        insertedIndexPaths = [IndexPath]()
+        deletedIndexPaths = [IndexPath]()
+        updatedIndexPaths = [IndexPath]()
+        movedIndexPaths = [IndexPath:IndexPath]()
+    }
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
+        
+        switch (type) {
         case .insert:
-            collectionView.insertItems(at: [newIndexPath!])
+            insertedIndexPaths.append(newIndexPath!)
             break
         case .delete:
-            collectionView.deleteItems(at: [indexPath!])
+            deletedIndexPaths.append(indexPath!)
             break
         case .update:
-            collectionView.reloadItems(at: [indexPath!])
+            updatedIndexPaths.append(indexPath!)
+            break
         case .move:
-            collectionView.moveItem(at: indexPath!, to: newIndexPath!)
+            movedIndexPaths[indexPath!] = newIndexPath
+            break
         }
     }
     
-    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView.reloadData()
+        
+        collectionView.performBatchUpdates({() -> Void in
+            
+            for inserted in self.insertedIndexPaths {
+                self.collectionView.insertItems(at: [inserted])
+            }
+            
+            for deleted in self.deletedIndexPaths {
+                self.collectionView.deleteItems(at: [deleted])
+            }
+            
+            for updated in self.updatedIndexPaths {
+                self.collectionView.reloadItems(at: [updated])
+            }
+            for (key,value) in self.movedIndexPaths {
+                self.collectionView.moveItem(at: key, to: value)
+            }
+            
+        }, completion: nil)
     }
     
 }
